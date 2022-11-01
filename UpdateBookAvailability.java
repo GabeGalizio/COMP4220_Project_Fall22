@@ -38,4 +38,14 @@ class UpdateBookAvailability {
 		asserEquals("The book 'Intro to agile 1' now has 10 books available for purchase", bs1.updateAvaialbilty("Intro to agile 1", 5));
 	}	
 	
+	@Test
+	//updating book stock quantity below 0
+	void test4() {
+		Book b1 = book("Intro to agile 1", 0);
+		
+		BookStore bs1 = new BookStore("UWindsor", 100);
+		
+		bs1.add(b1);
+		asserEquals("The book will have a negative quantity of books, which is not possible", bs1.updateAvaialbilty("Intro to agile 1", -5));
+	}
 }
