@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,17 +14,23 @@ class testListBookBookstore {
         book b3 = new book("Intro to assembly 1", 1);
         book b4 = new book("Intro to c 1", 1);
         // creates new book store to store books
-        bookstore bs1 = new BookStore("uwin", 100);
+        bookstore bs1 = new bookstore("uwin", 100);
+
+
         bs1.add(b1);
         bs1.add(b2);
         bs1.add(b3);
         bs1.add(b4);
 
+        ArrayList<String> expected = new ArrayList<String>();
+        expected.add("Intro to agile 1");
+        expected.add("Intro to java 2");
+        expected.add("Intro to assembly 1");
+        expected.add("Intro to c 1");
 
-        String expected[] = new String[] {"Intro to agile 1", "Intro to java 2", "Intro to assembly 1", "Intro to c 1"};
-        assertArrayEquals(expected, bs1.getbooks());
-
+        assertEquals(expected,bs1.getBooks());
     }
+
 
 
     @Test
@@ -34,33 +41,40 @@ class testListBookBookstore {
         book b3 = new book("Intro to assembly 1", 1);
         book b4 = new book("Intro to c 1", 1);
 
-        // creates new libaray to store books
-        bookstore bs1 = new BookStore("uwin", 100);
+        //creates 2 bookstores
+        bookstore bs1 = new bookstore("uwin", 100);
+        bookstore bs2 = new bookstore("uwin2", 101);
         bs1.add(b1);
         bs1.add(b2);
-        Library l1 = new Library("Leddy", 100);
-        l1.add(b3);
-        l1.add(b4);
+        bs2.add(b3);
+        bs2.add(b4);
 
-        String expected[] = new String[] {"Intro to agile 1", "Intro to java 2"};
-        assertArrayEquals(expected, bs1.getbooks());
+        ArrayList<String> expected = new ArrayList<String>();
+        expected.add("Intro to agile 1");
+        expected.add("Intro to java 2");
+        assertEquals(expected,bs1.getBooks());
 
     }
 
 
     @Test
-        //testing with all of the  items being from the book store none from library
+        //testing with all of the  items being from the library none from library
     void testCase3() {
         book b1 = new book("Intro to agile 1", 1);
         book b2 = new book("Intro to java 2", 1);
         book b3 = new book("Intro to assembly 1", 1);
         book b4 = new book("Intro to c 1", 1);
 
-        // creates new libaray to store books
-        bookstore bs1 = new BookStore("uwin", 100);
+        // creates new bookstore to store books
+        bookstore bs1 = new bookstore("uwin", 100);
+        bookstore bs2 = new bookstore("uwin2", 101);
+        bs2.add(b1);
+        bs2.add(b2);
+        bs2.add(b3);
+        bs2.add(b4);
 
-        String expected[] = new String[] {};
-        assertArrayEquals(expected, bs1.getbooks());
+        ArrayList<String> expected = new ArrayList<String>();
+        assertEquals(expected,bs1.getBooks());
     }
 
     @Test
@@ -73,15 +87,18 @@ class testListBookBookstore {
         book b3 = new book("Intro to assembly 1", 1);
         book b4 = new book("Intro to c 1", 1);
         // creates new book store to store books
-        bookstore bs1 = new BookStore("uwin", 100);
+        bookstore bs1 = new bookstore("uwin", 100);
         bs1.add(b1);
         bs1.add(b2);
         bs1.add(b3);
         bs1.add(b4);
 
 
-        String expected[] = new String[] {"Intro to java 2", "Intro to assembly 1", "Intro to c 1"};
-        assertArrayEquals(expected, bs1.getbooks());
+        ArrayList<String> expected = new ArrayList<String>();
+        expected.add("Intro to java 2");
+        expected.add("Intro to assembly 1");
+        expected.add("Intro to c 1");
+        assertEquals(expected,bs1.getBooks());
 
 
     }
