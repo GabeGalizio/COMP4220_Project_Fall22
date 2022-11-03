@@ -2,7 +2,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class TestCase1 {
+class BookStoreSearch {
 	
 	//test whether the search function returns a book 
 	@Test
