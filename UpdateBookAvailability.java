@@ -39,7 +39,7 @@ class UpdateBookAvailability {
 	}
 	
 	@Test
-	//testing if wrong book name is given
+	//testing if inputted book name is not within inventory.
 	void test4() {
 		Book b1 = new Book("Intro to agile 1", 0);
 		
