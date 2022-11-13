@@ -28,7 +28,7 @@ public class Bookstore {
     
     public String updateAvailability(String BookName, int updatedQuantity) {
     	for(int i = 0; i < this.Books.size(); i++) {
-    		if (this.Books.get(i).getName() == BookName) {
+    		if (this.Books.get(i).getName().equals(BookName)) {
     			int BookQuantity = this.Books.get(i).getQuantity();
     			
     			if(BookQuantity == 0 && BookQuantity + updatedQuantity > 0) {
