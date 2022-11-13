@@ -41,7 +41,7 @@ public class Bookstore {
     			}
     			else if(BookQuantity == 0 && BookQuantity + updatedQuantity <= 0) {
     				if(BookQuantity + updatedQuantity == 0) {
-    					return "No update made";
+    					return "No updates made";
     				}
     				else {
     					return "The Book '"+BookName+"' has no stock to purchase from";
