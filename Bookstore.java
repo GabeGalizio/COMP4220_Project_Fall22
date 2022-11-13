@@ -39,8 +39,14 @@ public class Bookstore {
     				this.Books.get(i).setQuantity(BookQuantity+updatedQuantity);
     				return "The Book '"+BookName+"' is now out of stock";
     			}
-    			else if(BookQuantity == 0 && BookQuantity + updatedQuantity < 0) {
-    				return "The Book '"+BookName+"' has no stock to purchase from";
+    			else if(BookQuantity == 0 && BookQuantity + updatedQuantity <= 0) {
+    				if(BookQuantity + updatedQuantity == 0) {
+    					return "No update made";
+    				}
+    				else {
+    					return "The Book '"+BookName+"' has no stock to purchase from";
+    				}
+    				
     			}
     		}
     	}
