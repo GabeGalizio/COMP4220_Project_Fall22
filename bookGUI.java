@@ -312,29 +312,56 @@ public class bookGUI{
 
     public static void viewBookPage(){
         JFrame f = new JFrame();//creating instance of JFrame
+        JPanel p = new JPanel(new BorderLayout());//creating instance of JPanel
+        JButton bmain1 = new JButton("Back to Main Menu");//creating instance of JButton
+        ArrayList<Book> booksInfo = new ArrayList<>();//creating arraylist to store information of books
 
+        
         Bookstore bs = new Bookstore("UWindsor", 100);
-        Book b1 = new Book("Agility Intro", 0);
-        Book b2 = new Book("Mechanics and power", 0);
-        Book b3 = new Book("Cells in animals", 0);
+        Book b1 = new Book("Agility Intro", 13);
+        Book b2 = new Book("Mechanics and power", 10);
+        Book b3 = new Book("Cells in animals", 5);
 
         bs.add(b1);
         bs.add(b2);
         bs.add(b3);
+        
+        booksInfo = bs.getBooks();//calls getbooks to get all available books in inventory
+        
+        String[][] books = new String[booksInfo.size()][2];//2d array to store book name and quantity
+        String[] columns = new String[] {"Name", "Quantity"};//array to store column names for table
+        
+        for(int i = 0; i < books.length; i++) {//for loop will fill 2d array with book values from the previous arraylist
+        	for(int j = 0; j < books[0].length; j++) {
+        		if(j == 0) {
+        			books[i][j] = booksInfo.get(i).getName().toString();//fill with book name
+        		}
+        		else {
+        			books[i][j] = String.valueOf(booksInfo.get(i).getQuantity());//fill with book quantity
+        		}
+        	}
+        }
+        
+        JTable table = new JTable(books, columns);//creating instance of table with book information
+        JScrollPane sp = new JScrollPane(table); // adding it to JScrollPane
+        
+        Border padding = BorderFactory.createEmptyBorder(50, 50, 50, 50);//padding for panel
 
-        JButton bmain1 =new JButton("Back to Main Menu");//creating instance of JButton
-
+        p.setBorder(padding);  
+       
         bmain1.setBounds(130,350,150, 20);//x axis, y axis, width, height
-        f.add(bmain1);//adding button in JFrame
-
+        p.add(bmain1, BorderLayout.PAGE_END);//adding button in JFrame
+        p.add(sp, BorderLayout.CENTER);        
+        f.setContentPane(p);
+        
         bmain1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.dispose();
             }
         });
+        
         f.setSize(400,500);//400 width and 500 height
-        f.setLayout(null);//using no layout managers
         f.setVisible(true);//making the frame visible
         f.setLocationRelativeTo(null);//sets the frame in the center of screen
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
