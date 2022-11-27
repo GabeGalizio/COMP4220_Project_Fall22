@@ -16,11 +16,11 @@ public class Bookstore {
     }
 
 
-    public ArrayList<String> getBooks() {
-        ArrayList<String> temp = new ArrayList<String>();
+    public ArrayList<Book> getBooks() {
+        ArrayList<Book> temp = new ArrayList<Book>();
         for (int i = 0; i < this.Books.size(); i++) {
             if (this.Books.get(i).getQuantity() > 0) {
-                temp.add(Books.get(i).toString());
+                temp.add(Books.get(i));
             }
         }
         return temp;
