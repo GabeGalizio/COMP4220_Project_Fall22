@@ -87,6 +87,11 @@ public class Bookstore {
                     return ""+BookName+"' has been added to inventory. Quantity: "+this.Books.get(i).getQuantity()+"";
                 }
             }
+            else{
+                Book temp = new Book(BookName, addedQuantity);
+                this.Books.add(temp);
+                return ""+BookName+"' has been added to the inventory, with quantity: " + addedQuantity+"";
+            }
         }
         return "Book does not exist within the inventory";
     }
