@@ -19,6 +19,7 @@ public class bookGUI{
         JButton b3 = new JButton("Request Book");//creating instance of JButton
         JButton b4 = new JButton("View Books");//creating instance of JButton
         JButton b5 = new JButton("Exit");//creating instance of JButton
+        JButton b6 = new JButton("Search");
         JButton b7 = new JButton("Create Order"); // Creates a new JButton
 
         b1.setBounds(140, 50, 115, 40);//x axis, y axis, width, height
@@ -27,6 +28,7 @@ public class bookGUI{
         b4.setBounds(140, 200, 115, 40);//x axis, y axis, width, height
         b5.setBounds(140, 250, 115, 40);//x axis, y axis, width, height
         b7.setBounds(140, 300, 115, 40);//x axis, y axis, width, height
+        b6.setBounds(140, 350, 115, 40);
 
         f.add(l);
         l.setBounds(120,-225,115,40);
@@ -40,6 +42,7 @@ public class bookGUI{
         f.add(b4);//adding button in JFrame
         f.add(b5);//adding button in JFrame
         f.add(b7);
+        f.add(b6);
 
         f.setSize(400, 500);//400 width and 500 height
         f.setLayout(null);//using no layout managers
@@ -79,6 +82,11 @@ public class bookGUI{
             public void actionPerformed(ActionEvent e) {
                 exitProg();
             }
+        });
+
+        b6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {searchPage();}
         });
 
         b7.addActionListener(new ActionListener() {
@@ -431,6 +439,62 @@ public class bookGUI{
         f.setLocationRelativeTo(null);//sets the frame in the center of screen
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+    }
+
+    public static void searchPage(){
+        JFrame f = new JFrame();//creating instance of JFrame
+        JLabel message = new JLabel();
+        JLabel inputbook = new JLabel("Search BookStore");
+        JTextField search = new JTextField();
+        JButton submitsearch = new JButton("Submit Request ");
+
+        message.setBounds(0,30,600,20);
+        message.setForeground(Color.red);
+        message.setHorizontalAlignment(JLabel.CENTER);
+        message.setVerticalAlignment(JLabel.CENTER);
+
+        inputbook.setBounds(150,100,150,20);//x axis, y axis, width, height
+        search.setBounds(130,120,150,30);//x axis, y axis, width, height
+        submitsearch.setBounds(100,250,200,20);//x axis, y axis, width, height
+
+        f.add(message);
+        f.add(inputbook);
+        f.add(search);//adding text field in JFrame
+        f.add(submitsearch);
+
+        submitsearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame f = new JFrame();//creating instance of JFrame
+                JLabel viewsearch = new JLabel("BOOKSTORE SEARCH:");
+
+                viewsearch.setBounds(150,100,150,20);//x axis, y axis, width, height
+
+
+                f.add(viewsearch);
+                f.setSize(400, 500);//400 width and 500 height
+                f.setLayout(null);//using no layout managers
+                f.setVisible(true);//making the frame visible
+                f.setLocationRelativeTo(null);//sets the frame in the center of screen
+            }
+        });
+
+        JButton bmain1 =new JButton("Back to Main Menu");//creating instance of JButton
+
+        bmain1.setBounds(130,350,150, 20);//x axis, y axis, width, height
+        f.add(bmain1);//adding button in JFrame
+
+        bmain1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                f.dispose();
+            }
+        });
+        f.setSize(400,500);//400 width and 500 height
+        f.setLayout(null);//using no layout managers
+        f.setVisible(true);//making the frame visible
+        f.setLocationRelativeTo(null);//sets the frame in the center of screen
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
 }
