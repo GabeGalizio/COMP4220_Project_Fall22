@@ -143,6 +143,7 @@ public class bookGUI{
                 String bquantity = quantity.getText();
                 Boolean numeric = true;
                 Book b1 = new Book("Astro 3", 0);
+                Bookstore bs = new Bookstore("Uwindsor",1001);
                 bs.add(b1);
 
                 try {
@@ -486,11 +487,6 @@ public class bookGUI{
         JTextField search = new JTextField();
         JButton submitsearch = new JButton("Submit Request ");
 
-        message.setBounds(0,30,600,20);
-        message.setForeground(Color.red);
-        message.setHorizontalAlignment(JLabel.CENTER);
-        message.setVerticalAlignment(JLabel.CENTER);
-
         inputbook.setBounds(150,100,150,20);//x axis, y axis, width, height
         search.setBounds(130,120,150,30);//x axis, y axis, width, height
         submitsearch.setBounds(100,250,200,20);//x axis, y axis, width, height
@@ -506,11 +502,17 @@ public class bookGUI{
                 JFrame f = new JFrame();//creating instance of JFrame
                 JLabel viewsearch = new JLabel("BOOKSTORE SEARCH:");
                 JPanel view = new JPanel(new BorderLayout());
+                JLabel message = new JLabel();
                 ArrayList<Book> booksInfo = new ArrayList<>();
+                Boolean numeric = true;
                 Bookstore bs = new Bookstore("UWindsor", 100);
                 Book b1 = new Book("Agility Intro", 13);
                 viewsearch.setBounds(0,10,150,40);
                 bs.add(b1);
+                message.setBounds(0,30,600,20);
+                message.setForeground(Color.red);
+                message.setHorizontalAlignment(JLabel.CENTER);
+                message.setVerticalAlignment(JLabel.CENTER);
 
                 booksInfo = bs.getBooks();
 
@@ -526,6 +528,16 @@ public class bookGUI{
                             books[i][j] = String.valueOf(booksInfo.get(i).getQuantity());
                         }
                     }
+
+                }
+
+                if(numeric) {
+                    String pmessage = bs.search("Astro 3");
+
+                    message.setText(pmessage);
+                }
+                else {
+                    message.setText("Quantity must be an integer!");
                 }
 
                 JTable table = new JTable(books, columns);
@@ -534,21 +546,35 @@ public class bookGUI{
                 Border padding = BorderFactory.createEmptyBorder(50, 50, 50, 50);
 
                 view.setBorder(padding);
+                JButton bmain1 =new JButton("Back to Main Menu");//creating instance of JButton
+
+                bmain1.setBounds(120,420,150, 20);//x axis, y axis, width, height
+                f.add(bmain1);//adding button in JFrame
+                view.add(bmain1);
+                bmain1.setVisible(true);
+
+                bmain1.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        f.dispose();
+                    }
+                });
 
                 f.add(viewsearch);
                 f.setSize(400, 500);//400 width and 500 height
                 f.setLayout(null);//using no layout managers
                 f.setVisible(true);//making the frame visible
                 f.setLocationRelativeTo(null);//sets the frame in the center of screen
+                f.add(message);
                 view.add(sp, BorderLayout.CENTER);
                 f.setContentPane(view);
             }
         });
-
         JButton bmain1 =new JButton("Back to Main Menu");//creating instance of JButton
-
-        bmain1.setBounds(130,350,150, 20);//x axis, y axis, width, height
+        bmain1.setBounds(120,420,150, 20);//x axis, y axis, width, height
         f.add(bmain1);//adding button in JFrame
+        f.add(bmain1);
+        bmain1.setVisible(true);
 
         bmain1.addActionListener(new ActionListener() {
             @Override

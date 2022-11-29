@@ -120,6 +120,21 @@ public class Bookstore {
         return temp;
     }
 
+    public String search(String BookName) {
+        for (int i = 0; i < this.Books.size(); i++) {
+            if (this.Books.get(i).getName().equals(BookName)) {
+                int istrue;
+                if(this.Books.isEmpty()){
+                    return "Error.Please enter a string";
+                }
+                else{
+                    continue;
+                }
+            }
+        }
+        return "Book does not exist within the inventory";
+    }
+
 
 }
 
