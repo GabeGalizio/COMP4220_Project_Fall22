@@ -27,29 +27,25 @@ public class Bookstore {
     }
 
     public String updateavailability(String BookName, int updatedQuantity) {
-        for(int i = 0; i < this.Books.size(); i++) {
+        for (int i = 0; i < this.Books.size(); i++) {
             if (this.Books.get(i).getName().equals(BookName)) {
                 int BookQuantity = this.Books.get(i).getQuantity();
 
-                if(updatedQuantity == 0) {
+                if (updatedQuantity == 0) {
                     return "No updates made";
-                }
-                else if(BookQuantity >= 0 && BookQuantity + updatedQuantity > 0) {
-                    this.Books.get(i).setQuantity(BookQuantity+updatedQuantity);
-                    return "The Book '"+BookName+"' now has "+this.Books.get(i).getQuantity()+" books in stock";
-                }
-                else if(BookQuantity > 0 && BookQuantity + updatedQuantity <= 0) {
-                    if(BookQuantity + updatedQuantity < 0) {
-                        return "The Book '"+BookName+"' has insufficent stock";
-                    }
-                    else {
-                        this.Books.get(i).setQuantity(BookQuantity+updatedQuantity);
-                        return "The Book '"+BookName+"' is now out of stock";
+                } else if (BookQuantity >= 0 && BookQuantity + updatedQuantity > 0) {
+                    this.Books.get(i).setQuantity(BookQuantity + updatedQuantity);
+                    return "The Book '" + BookName + "' now has " + this.Books.get(i).getQuantity() + " books in stock";
+                } else if (BookQuantity > 0 && BookQuantity + updatedQuantity <= 0) {
+                    if (BookQuantity + updatedQuantity < 0) {
+                        return "The Book '" + BookName + "' has insufficent stock";
+                    } else {
+                        this.Books.get(i).setQuantity(BookQuantity + updatedQuantity);
+                        return "The Book '" + BookName + "' is now out of stock";
                     }
 
-                }
-                else if(BookQuantity == 0 && BookQuantity + updatedQuantity < 0) {
-                    return "The Book '"+BookName+"' is not in stock";
+                } else if (BookQuantity == 0 && BookQuantity + updatedQuantity < 0) {
+                    return "The Book '" + BookName + "' is not in stock";
 
                 }
             }
@@ -58,16 +54,15 @@ public class Bookstore {
     }
 
     public String requestBooks(String BookName, int requestedQuantity) {
-        for(int i = 0; i < this.Books.size(); i++) {
+        for (int i = 0; i < this.Books.size(); i++) {
             if (this.Books.get(i).getName().equals(BookName)) {
                 int BookQuantity = this.Books.get(i).getQuantity();
 
-                if(requestedQuantity == 0) {
+                if (requestedQuantity == 0) {
                     return "No requests submitted";
-                }
-                else if(BookQuantity >= 0 && BookQuantity + requestedQuantity > 0) {
-                    this.Books.get(i).setQuantity(BookQuantity+requestedQuantity);
-                    return ""+BookName+"' has been requested for shipment. "+this.Books.get(i).getQuantity()+" \namount of books have been requested.";
+                } else if (BookQuantity >= 0 && BookQuantity + requestedQuantity > 0) {
+                    this.Books.get(i).setQuantity(BookQuantity + requestedQuantity);
+                    return "" + BookName + "' has been requested for shipment. " + this.Books.get(i).getQuantity() + " \namount of books have been requested.";
                 }
             }
         }
@@ -75,24 +70,23 @@ public class Bookstore {
     }
 
     public String addBook(String BookName, int addedQuantity) {
-        for(int i = 0; i < this.Books.size(); i++) {
+        for (int i = 0; i < this.Books.size(); i++) {
             if (this.Books.get(i).getName().equals(BookName)) {
                 int BookQuantity = this.Books.get(i).getQuantity();
 
-                if(addedQuantity == 0) {
+                if (addedQuantity == 0) {
                     return "No requests submitted";
+                } else if (BookQuantity >= 0 && BookQuantity + addedQuantity > 0) {
+                    this.Books.get(i).setQuantity(BookQuantity + addedQuantity);
+                    return "" + BookName + "' has been added to inventory. Quantity: " + this.Books.get(i).getQuantity() + "";
                 }
-                else if(BookQuantity >= 0 && BookQuantity + addedQuantity > 0) {
-                    this.Books.get(i).setQuantity(BookQuantity+addedQuantity);
-                    return ""+BookName+"' has been added to inventory. Quantity: "+this.Books.get(i).getQuantity()+"";
-                }
-            }
-            else{
+            } else {
                 Book temp = new Book(BookName, addedQuantity);
                 this.Books.add(temp);
-                return ""+BookName+"' has been added to the inventory, with quantity: " + addedQuantity+"";
+                return "" + BookName + "' has been added to the inventory, with quantity: " + addedQuantity + "";
             }
         }
         return "Book does not exist within the inventory";
     }
+
 }

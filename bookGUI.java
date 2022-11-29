@@ -496,15 +496,43 @@ public class bookGUI{
             public void actionPerformed(ActionEvent e) {
                 JFrame f = new JFrame();//creating instance of JFrame
                 JLabel viewsearch = new JLabel("BOOKSTORE SEARCH:");
+                JPanel view = new JPanel(new BorderLayout());
+                ArrayList<Book> booksInfo = new ArrayList<>();
+                Bookstore bs = new Bookstore("UWindsor", 100);
+                Book b1 = new Book("Agility Intro", 13);
+                viewsearch.setBounds(0,10,150,40);
+                bs.add(b1);
 
-                viewsearch.setBounds(150,100,150,20);//x axis, y axis, width, height
+                booksInfo = bs.getBooks();
 
+                String[][] books = new String[booksInfo.size()][2];
+                String[] columns = new String[] {"Name", "Quantity"};
+
+                for(int i = 0; i < books.length; i++) {
+                    for(int j = 0; j < books[0].length; j++) {
+                        if(j == 0) {
+                            books[i][j] = booksInfo.get(i).getName().toString();
+                        }
+                        else {
+                            books[i][j] = String.valueOf(booksInfo.get(i).getQuantity());
+                        }
+                    }
+                }
+
+                JTable table = new JTable(books, columns);
+                JScrollPane sp = new JScrollPane(table); // adding it to JScrollPane
+
+                Border padding = BorderFactory.createEmptyBorder(50, 50, 50, 50);
+
+                view.setBorder(padding);
 
                 f.add(viewsearch);
                 f.setSize(400, 500);//400 width and 500 height
                 f.setLayout(null);//using no layout managers
                 f.setVisible(true);//making the frame visible
                 f.setLocationRelativeTo(null);//sets the frame in the center of screen
+                view.add(sp, BorderLayout.CENTER);
+                f.setContentPane(view);
             }
         });
 
