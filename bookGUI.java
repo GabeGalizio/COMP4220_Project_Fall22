@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 
 public class bookGUI{
+    private Bookstore bs = new Bookstore("UWindsor", 100);
     public static void main(String[] args) {
 
 
@@ -141,7 +142,6 @@ public class bookGUI{
                 String book = bookid.getText();
                 String bquantity = quantity.getText();
                 Boolean numeric = true;
-                Bookstore bs = new Bookstore("UWindsor", 100);
                 Book b1 = new Book("Astro 3", 0);
                 bs.add(b1);
 
@@ -392,10 +392,12 @@ public class bookGUI{
 
     public static void createOrder(){
         JFrame f = new JFrame();//creating instance of JFrameJLabel message = new JLabel();
-        JLabel inputbook = new JLabel("Input Book Name");
+        JLabel inputbook = new JLabel("Input book name");
         JLabel inputquantity = new JLabel("Input Quantity");
+        JLabel invoiceName = new JLabel("Input invoice Name");
         JTextField bookid = new JTextField();
         JTextField quantity = new JTextField();
+        JTextField title = new JTextField();
         JButton createOrder = new JButton("Create Order");
         JButton bmain1 =new JButton("Back to Main Menu");//creating instance of JButton
         JLabel message = new JLabel();
@@ -409,12 +411,13 @@ public class bookGUI{
         message.setHorizontalAlignment(JLabel.CENTER);
         message.setVerticalAlignment(JLabel.CENTER);
 
-
+        invoiceName.setBounds(150,40,150,20);//x axis, y axis, width, height
+        title.setBounds(130,120,90,30);//x axis, y axis, width, height
         inputbook.setBounds(150,100,150,20);//x axis, y axis, width, height
         bookid.setBounds(130,120,150,30);//x axis, y axis, width, height
         inputquantity.setBounds(160,160,150,20);//x axis, y axis, width, height
         quantity.setBounds(130,180,150,30);//x axis, y axis, width, height
-        createOrder.setBounds(155,250,100,20);//x axis, y axis, width, height
+        createOrder.setBounds(150,250,150,20);//x axis, y axis, width, height
         bmain1.setBounds(130,350,150, 20);//x axis, y axis, width, height
 
         f.add(message);
@@ -424,15 +427,19 @@ public class bookGUI{
         f.add(quantity);//adding text field in JFrame
         f.add(createOrder);
         f.add(bmain1);//adding button in JFrame
+        f.add(invoiceName);
+        f.add(title);
 
         createOrder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Bookstore bs = new Bookstore("UWindsor", 100);
                 String book = bookid.getText();
+                String title2 = title.getText();
                 String bquantity = quantity.getText();
                 Boolean numeric = true;
-                Bookstore bs = new Bookstore("UWindsor", 100);
-
+                Boolean inBookstore = bs.inStore(book);
+                System.out.println(bs.inStore(book));
 
                 try {
                     int bookquantity = Integer.parseInt(bquantity);
@@ -441,17 +448,19 @@ public class bookGUI{
                 }
 
 
-                if(numeric) {
-                    String pmessage = bs.addBook(book, Integer.parseInt(bquantity));
+                //TODO create method to call search to see if the book exists in the book store then crate new flag before adding the book
+                if(numeric && inBookstore) {
 
+                    Book temp = bs.getBook(book);
+                    //bs.createInvoice(book, );
+                    String pmessage = bs.createInvoice(temp, Integer.parseInt(bquantity),title2);
                     message.setText(pmessage);
                 }
-                else {
+                else if(!numeric){
                     message.setText("Quantity must be an integer!");
+                }else if(!inBookstore){
+                    message.setText("Must be an item in the book store");
                 }
-
-
-
             }
         });
 

@@ -4,11 +4,13 @@ public class Bookstore {
     public String name;
     public int storeID;
     public ArrayList<Book> Books;
+    public ArrayList<invoice> invoice;
 
     public Bookstore(String name, int storeID) {
         this.name = name;
         this.storeID = storeID;
         Books = new ArrayList<>();
+        invoice = new ArrayList<>();
     }
 
     public void add(Book b1) {
@@ -89,4 +91,36 @@ public class Bookstore {
         return "Book does not exist within the inventory";
     }
 
+    public boolean inStore(String n) {
+        for (int i = 0; i < this.Books.size(); i++) {
+            if (this.Books.get(i).getName().equals(n)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //takes in the book to be added to the invoice and the quantity
+    public String createInvoice(Book b, int q, String invoiceName){
+        invoice temp = new invoice(invoiceName);
+        temp.setQuantityOrdered(q);
+        temp.addBooks(b);
+        b.setQuantity(b.getQuantity()-1);
+        return "Invoice created : "  + invoiceName + " for " + q +" of " + b.getName();
+    }
+
+
+    public Book getBook(String n) {
+        Book temp = new Book();
+        for (int i = 0; i < this.Books.size(); i++) {
+            if (this.Books.get(i).getName().equals(n)) {
+                temp.setName(this.Books.get(i).getName());
+                temp.setQuantity(this.Books.get(i).getQuantity());
+            }
+        }
+        return temp;
+    }
+
+
 }
+
+
