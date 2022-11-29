@@ -11,8 +11,38 @@ import java.util.Scanner;
 
 
 public class bookGUI{
-    private Bookstore bs = new Bookstore("UWindsor", 100);
+    private static Bookstore bs = new Bookstore("UWindsor", 100);
+    private static Book b1 = new Book("Intro to agile 1", 0);
+    private static Book b2 = new Book("Intro to physics 1", 0);
+    private static Book b3 = new Book("Agility Intro", 13);
+    private static Book b4 = new Book("Mechanics and power", 10);
+    private static Book b5 = new Book("Cells in animals", 5);
+    private static Book b6 = new Book("Intro to Java", 8);
+    private static Book b7 = new Book("Fundamentals of OOP", 3);
+    private static Book b8 = new Book("Web Developement", 36);
+    private static Book b9 = new Book("Database Design", 17);
+    private static Book b10 = new Book("Business Management", 0);
+    private static Book b11 = new Book("Intro to Latin 1", 30);
+    private static Book b12 = new Book("Mathematical Foundations", 1);
+    private static Book b13 = new Book("Forensic Science 101", 0);
+    private static Book b14 = new Book("Human Anatomy 1", 24);
+    private static Book b15 = new Book("Human Anatomy 2", 60);
     public static void main(String[] args) {
+        bs.add(b1);
+        bs.add(b2);
+        bs.add(b3);
+        bs.add(b4);
+        bs.add(b5);
+        bs.add(b6);
+        bs.add(b7);
+        bs.add(b8);
+        bs.add(b9);
+        bs.add(b10);
+        bs.add(b11);
+        bs.add(b12);
+        bs.add(b13);
+        bs.add(b14);
+        bs.add(b15);
 
 
         JFrame f = new JFrame();//creating instance of JFrame
@@ -142,9 +172,6 @@ public class bookGUI{
                 String book = bookid.getText();
                 String bquantity = quantity.getText();
                 Boolean numeric = true;
-                Book b1 = new Book("Astro 3", 0);
-                Bookstore bs = new Bookstore("Uwindsor",1001);
-                bs.add(b1);
 
                 try {
                     int bookquantity = Integer.parseInt(bquantity);
@@ -152,14 +179,14 @@ public class bookGUI{
                     numeric = false;
                 }
 
-
-                if(numeric) {
+                if(numeric && !book.isEmpty()) {
                     String pmessage = bs.addBook(book, Integer.parseInt(bquantity));
 
+                    message.setForeground(Color.blue);
                     message.setText(pmessage);
                 }
                 else {
-                    message.setText("Quantity must be an integer!");
+                    message.setText("Input must be a string and integer!");
                 }
             }
         });
@@ -216,9 +243,6 @@ public class bookGUI{
                 String book = bookid.getText();
                 String bquantity = quantity.getText();
                 Boolean numeric = true;
-                Bookstore bs = new Bookstore("UWindsor", 100);
-                Book b1 = new Book("Intro to agile 1", 0);
-                bs.add(b1);
 
                 try {
                     int bookquantity = Integer.parseInt(bquantity);
@@ -226,16 +250,15 @@ public class bookGUI{
                     numeric = false;
                 }
 
-
-                if(numeric) {
+                if(numeric  && !book.isEmpty()) {
                     String pmessage = bs.updateavailability(book, Integer.parseInt(bquantity));
 
+                    message.setForeground(Color.blue);
                     message.setText(pmessage);
                 }
                 else {
-                    message.setText("Quantity must be an integer!");
+                    message.setText("Input must be a string and integer!");
                 }
-
             }
         });
 
@@ -289,9 +312,6 @@ public class bookGUI{
                 String book = bookid.getText();
                 String bquantity = quantity.getText();
                 Boolean numeric = true;
-                Bookstore bs = new Bookstore("UWindsor", 100);
-                Book b1 = new Book("Intro to physics 1", 0);
-                bs.add(b1);
 
                 try {
                     int bookquantity = Integer.parseInt(bquantity);
@@ -299,16 +319,15 @@ public class bookGUI{
                     numeric = false;
                 }
 
-
-                if(numeric) {
+                if(numeric  && !book.isEmpty()) {
                     String pmessage = bs.requestBooks(book, Integer.parseInt(bquantity));
 
+                    message.setForeground(Color.blue);
                     message.setText(pmessage);
                 }
                 else {
-                    message.setText("Quantity must be an integer!");
+                    message.setText("Input must be a string and integer!");
                 }
-
             }
         });
 
@@ -337,16 +356,6 @@ public class bookGUI{
         JButton bmain1 = new JButton("Back to Main Menu");//creating instance of JButton
         ArrayList<Book> booksInfo = new ArrayList<>();
 
-        
-        Bookstore bs = new Bookstore("UWindsor", 100);
-        Book b1 = new Book("Agility Intro", 13);
-        Book b2 = new Book("Mechanics and power", 10);
-        Book b3 = new Book("Cells in animals", 5);
-
-        bs.add(b1);
-        bs.add(b2);
-        bs.add(b3);
-        
         booksInfo = bs.getBooks();
         
         String[][] books = new String[booksInfo.size()][2];
@@ -413,7 +422,7 @@ public class bookGUI{
         message.setVerticalAlignment(JLabel.CENTER);
 
         invoiceName.setBounds(150,40,150,20);//x axis, y axis, width, height
-        title.setBounds(130,120,90,30);//x axis, y axis, width, height
+        title.setBounds(130,60,150,30);//x axis, y axis, width, height
         inputbook.setBounds(150,100,150,20);//x axis, y axis, width, height
         bookid.setBounds(130,120,150,30);//x axis, y axis, width, height
         inputquantity.setBounds(160,160,150,20);//x axis, y axis, width, height
@@ -434,13 +443,16 @@ public class bookGUI{
         createOrder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Bookstore bs = new Bookstore("UWindsor", 100);
                 String book = bookid.getText();
                 String title2 = title.getText();
                 String bquantity = quantity.getText();
                 Boolean numeric = true;
                 Boolean inBookstore = bs.inStore(book);
+                //bs.addBook(book, Integer.parseInt(bquantity));
                 System.out.println(bs.inStore(book));
+                System.out.println(book);
+                System.out.println(title2);
+                System.out.println(bquantity);
 
                 try {
                     int bookquantity = Integer.parseInt(bquantity);
@@ -449,18 +461,18 @@ public class bookGUI{
                 }
 
 
-                //TODO create method to call search to see if the book exists in the book store then crate new flag before adding the book
-                if(numeric && inBookstore) {
 
+                if(numeric && !book.isEmpty() && inBookstore) {
                     Book temp = bs.getBook(book);
                     //bs.createInvoice(book, );
                     String pmessage = bs.createInvoice(temp, Integer.parseInt(bquantity),title2);
+                    message.setForeground(Color.blue);
                     message.setText(pmessage);
                 }
-                else if(!numeric){
-                    message.setText("Quantity must be an integer!");
-                }else if(!inBookstore){
+                else if(numeric && !book.isEmpty() && !inBookstore){
                     message.setText("Must be an item in the book store");
+                }else {
+                    message.setText("Input must be a string and integer!");
                 }
             }
         });
@@ -485,11 +497,16 @@ public class bookGUI{
         JLabel message = new JLabel();
         JLabel inputbook = new JLabel("Search BookStore");
         JTextField search = new JTextField();
-        JButton submitsearch = new JButton("Submit Request ");
+        JButton submitsearch = new JButton("Submit");
+
+        message.setBounds(25,30,350,50);
+        message.setForeground(Color.red);
+        message.setHorizontalAlignment(JLabel.CENTER);
+        message.setVerticalAlignment(JLabel.CENTER);
 
         inputbook.setBounds(150,100,150,20);//x axis, y axis, width, height
         search.setBounds(130,120,150,30);//x axis, y axis, width, height
-        submitsearch.setBounds(100,250,200,20);//x axis, y axis, width, height
+        submitsearch.setBounds(150,250,100,20);//x axis, y axis, width, height
 
         f.add(message);
         f.add(inputbook);
@@ -499,82 +516,61 @@ public class bookGUI{
         submitsearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame f = new JFrame();//creating instance of JFrame
-                JLabel viewsearch = new JLabel("BOOKSTORE SEARCH:");
-                JPanel view = new JPanel(new BorderLayout());
-                JLabel message = new JLabel();
-                ArrayList<Book> booksInfo = new ArrayList<>();
-                Boolean numeric = true;
-                Bookstore bs = new Bookstore("UWindsor", 100);
-                Book b1 = new Book("Agility Intro", 13);
-                viewsearch.setBounds(0,10,150,40);
-                bs.add(b1);
-                message.setBounds(0,30,600,20);
-                message.setForeground(Color.red);
-                message.setHorizontalAlignment(JLabel.CENTER);
-                message.setVerticalAlignment(JLabel.CENTER);
+                if(!search.getText().isEmpty()) {
+                    JFrame f = new JFrame();//creating instance of JFrame
+                    JLabel viewsearch = new JLabel("BOOKSTORE SEARCH:");
+                    JPanel view = new JPanel(new BorderLayout());
+                    JButton bmain1 = new JButton("Back");
+                    ArrayList<Book> booksInfo = new ArrayList<>();
+                    viewsearch.setBounds(0,10,150,40);
 
-                booksInfo = bs.getBooks();
+                    booksInfo = bs.searchResult(search.getText());
 
-                String[][] books = new String[booksInfo.size()][2];
-                String[] columns = new String[] {"Name", "Quantity"};
+                    String[][] books = new String[booksInfo.size()][2];
+                    String[] columns = new String[] {"Name", "Quantity"};
 
-                for(int i = 0; i < books.length; i++) {
-                    for(int j = 0; j < books[0].length; j++) {
-                        if(j == 0) {
-                            books[i][j] = booksInfo.get(i).getName().toString();
-                        }
-                        else {
-                            books[i][j] = String.valueOf(booksInfo.get(i).getQuantity());
+                    for(int i = 0; i < books.length; i++) {
+                        for(int j = 0; j < books[0].length; j++) {
+                            if(j == 0) {
+                                books[i][j] = booksInfo.get(i).getName().toString();
+                            }
+                            else {
+                                books[i][j] = String.valueOf(booksInfo.get(i).getQuantity());
+                            }
                         }
                     }
 
+                    JTable table = new JTable(books, columns);
+                    JScrollPane sp = new JScrollPane(table); // adding it to JScrollPane
+
+                    Border padding = BorderFactory.createEmptyBorder(50, 50, 50, 50);
+
+                    view.setBorder(padding);
+
+                    bmain1.setBounds(130,350,150, 20);//x axis, y axis, width, height
+                    view.add(bmain1, BorderLayout.PAGE_END);//adding button in JFrame
+                    view.add(sp, BorderLayout.CENTER);
+
+                    bmain1.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            f.dispose();
+                        }
+                    });
+
+                    f.setContentPane(view);
+                    f.setSize(400, 500);//400 width and 500 height
+                    f.setVisible(true);//making the frame visible
+                    f.setLocationRelativeTo(null);//sets the frame in the center of screen
+                    f.setContentPane(view);
                 }
-
-                if(numeric) {
-                    String pmessage = bs.search("Astro 3");
-
-                    message.setText(pmessage);
-                }
-                else {
-                    message.setText("Quantity must be an integer!");
-                }
-
-                JTable table = new JTable(books, columns);
-                JScrollPane sp = new JScrollPane(table); // adding it to JScrollPane
-
-                Border padding = BorderFactory.createEmptyBorder(50, 50, 50, 50);
-
-                view.setBorder(padding);
-                JButton bmain1 =new JButton("Back to Main Menu");//creating instance of JButton
-
-                bmain1.setBounds(120,420,150, 20);//x axis, y axis, width, height
-                f.add(bmain1);//adding button in JFrame
-                view.add(bmain1);
-                bmain1.setVisible(true);
-
-                bmain1.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        f.dispose();
-                    }
-                });
-
-                f.add(viewsearch);
-                f.setSize(400, 500);//400 width and 500 height
-                f.setLayout(null);//using no layout managers
-                f.setVisible(true);//making the frame visible
-                f.setLocationRelativeTo(null);//sets the frame in the center of screen
-                f.add(message);
-                view.add(sp, BorderLayout.CENTER);
-                f.setContentPane(view);
             }
         });
+
         JButton bmain1 =new JButton("Back to Main Menu");//creating instance of JButton
-        bmain1.setBounds(120,420,150, 20);//x axis, y axis, width, height
+
+        bmain1.setBounds(130,350,150, 20);//x axis, y axis, width, height
         f.add(bmain1);//adding button in JFrame
-        f.add(bmain1);
-        bmain1.setVisible(true);
 
         bmain1.addActionListener(new ActionListener() {
             @Override
@@ -582,6 +578,7 @@ public class bookGUI{
                 f.dispose();
             }
         });
+
         f.setSize(400,500);//400 width and 500 height
         f.setLayout(null);//using no layout managers
         f.setVisible(true);//making the frame visible

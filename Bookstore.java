@@ -4,7 +4,7 @@ public class Bookstore {
     public String name;
     public int storeID;
     public ArrayList<Book> Books;
-    public ArrayList<invoice> invoice;
+    public ArrayList<Invoice> invoice;
 
     public Bookstore(String name, int storeID) {
         this.name = name;
@@ -101,7 +101,7 @@ public class Bookstore {
     }
     //takes in the book to be added to the invoice and the quantity
     public String createInvoice(Book b, int q, String invoiceName){
-        invoice temp = new invoice(invoiceName);
+        Invoice temp = new Invoice(invoiceName);
         temp.setQuantityOrdered(q);
         temp.addBooks(b);
         b.setQuantity(b.getQuantity()-1);
@@ -115,6 +115,17 @@ public class Bookstore {
             if (this.Books.get(i).getName().equals(n)) {
                 temp.setName(this.Books.get(i).getName());
                 temp.setQuantity(this.Books.get(i).getQuantity());
+            }
+        }
+        return temp;
+    }
+
+
+    public ArrayList<Book> searchResult(String n) {
+        ArrayList<Book> temp = new ArrayList<Book>();
+        for (int i = 0; i < this.Books.size(); i++) {
+            if (this.Books.get(i).getName().contains(n)) {
+                temp.add(Books.get(i));
             }
         }
         return temp;

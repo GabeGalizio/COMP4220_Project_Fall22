@@ -2,12 +2,12 @@
 
 import java.util.ArrayList;
 
-public class invoice {
+public class Invoice {
     private String invoiceNum;
     private int quantityOrdered;
     private ArrayList<Book> books;
 
-    public invoice(String invoiceNum) {
+    public Invoice(String invoiceNum) {
         this.invoiceNum = invoiceNum;
         books = new ArrayList<>();
     }
